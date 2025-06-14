@@ -3,13 +3,13 @@ function log(req, res, next) {
     next();
 }
 
-function auth(req, res, next) {
-    if (req.headers["authorization"] == "secret-token") {
-        next();
-    } else {
-        res.status(403).send("Unauthorized");
-    }
-}
+// function auth(req, res, next) {
+//     if (req.headers["authorization"] == "secret-token") {
+//         next();
+//     } else {
+//         res.status(403).send("Unauthorized");
+//     }
+// }
 
 function errorHandler(err, req, res, next) {
     console.error(err.stack);

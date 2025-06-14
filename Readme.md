@@ -8,4 +8,6 @@ Node.js  and Express-based server
 Restful API principles addhered to
 Middleware for logging
 Error handling middleware
-Support for CRUD operations:
+Support for CRUD operations:GET, POST ,PATCH , DELETE
+Data filtering via query parameters
+Rendered views using a template engine

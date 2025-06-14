@@ -10,12 +10,12 @@ router.get("/users",  (req, res) => res.json(users));
 router.post("/users",  (req, res) => {
     // console.log(req.body);
     const payload = JSON.parse(req.body);
-    // console.log(payload);
+    
     const { name } = payload;    
     if (!name) {
         return res.status(400).json({ error: "Name is required" });
     }
-    // console.log(req.body);
+    
     const newUser = { id: users.length + 1, name };
     users.push(newUser);
     res.status(201).json(newUser);
