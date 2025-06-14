@@ -20,6 +20,32 @@ router.post("/users",  (req, res) => {
     users.push(newUser);
     res.status(201).json(newUser);
 });
+router.patch("/users/:id", (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = users.find(u => u.id === userId);
+    
+    if (!user) {
+        return res.status(404).json({ error: "User not found" });
+    }
+    
+    const { name } = req.body;
+    if (name) {
+        user.name = name;
+    }
+    
+    res.json(user);
+});
+router.delete("/users/:id", (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const userIndex = users.findIndex(u => u.id === userId);
+    
+    if (userIndex === -1) {
+        return res.status(404).json({ error: "User not found" });
+    }
+    
+    users.splice(userIndex, 1);
+    res.status(204).send();
+});
 
 router.get("/posts", (req, res) => res.json(posts));
 router.get("/comments", (req, res) => res.json(comments));
