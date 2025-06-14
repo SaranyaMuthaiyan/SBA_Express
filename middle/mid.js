@@ -1,5 +1,5 @@
 function log(req, res, next) {
-    // console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 }
 
@@ -16,4 +16,4 @@ function errorHandler(err, req, res, next) {
     res.status(500).json({ message: "Something went wrong" });
 }
 
-module.exports = { log, auth, errorHandler };
+module.exports = { log,  errorHandler };
