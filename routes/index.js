@@ -11,7 +11,7 @@ router.post("/users",  (req, res) => {
     
     // const payload = JSON.parse(req.body);
     
-    const { name } = payload;    
+    const { name } = req.body;    
     if (!name) {
         return res.status(400).json({ error: "Name is required" });
     }
@@ -22,6 +22,7 @@ router.post("/users",  (req, res) => {
 });
 router.patch("/users/:id", (req, res) => {
     const userId = parseInt(req.params.id, 10);
+    console.log(userId);
     const user = users.find(u => u.id === userId);
     
     if (!user) {
