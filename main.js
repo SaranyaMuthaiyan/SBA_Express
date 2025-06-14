@@ -9,6 +9,8 @@ const port = 8080
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(log);
+app.use(errorHandler);
+app.use(router)
 
 
 app.set("view engine", "ejs");
