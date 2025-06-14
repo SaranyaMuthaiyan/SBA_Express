@@ -10,4 +10,7 @@ Middleware for logging
 Error handling middleware
 Support for CRUD operations:GET, POST ,PATCH , DELETE
 Data filtering via query parameters
-Rendered views using a template engine
+Rendered views using a template engine.
+Static file serving with Express.Simple CSS styling for views.HTML Forms for API interactions.
+
+Technologies Used:Node.js,Express,js,Ejs,Middleware, CSS
