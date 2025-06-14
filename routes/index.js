@@ -9,7 +9,7 @@ let comments = [{id:1, postId:1, text: "Wow!"}];
 router.get("/users",  (req, res) => res.json(users));
 router.post("/users",  (req, res) => {
     
-    const payload = JSON.parse(req.body);
+    // const payload = JSON.parse(req.body);
     
     const { name } = payload;    
     if (!name) {
@@ -28,12 +28,12 @@ router.patch("/users/:id", (req, res) => {
         return res.status(404).json({ error: "User not found" });
     }
     
-    const { name } = req.body;
-    if (name) {
-        user.name = name;
+    if(req.body.name){;
+    
+        user.name = req.body.name;
     }
     
-    res.json(user);
+    res.json({messgae: "User updated" ,user});
 });
 router.delete("/users/:id", (req, res) => {
     const userId = parseInt(req.params.id, 10);
@@ -44,7 +44,7 @@ router.delete("/users/:id", (req, res) => {
     }
     
     users.splice(userIndex, 1);
-    res.status(204).send();
+    res.json({ message: "User deleted" });
 });
 
 router.get("/posts", (req, res) => res.json(posts));
