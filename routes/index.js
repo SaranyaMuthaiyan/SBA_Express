@@ -51,4 +51,16 @@ router.delete("/users/:id", (req, res) => {
 router.get("/posts", (req, res) => res.json(posts));
 router.get("/comments", (req, res) => res.json(comments));
 
+
+router.get("/user", (req, res) => {
+    let filteredUsers = users;
+    if (req.query.name) {
+        filteredUsers = filteredUsers.filter(user => 
+            user.name.toLowerCase().includes(req.query.name.toLowerCase())
+        );  
+    }   
+    res.json(filteredUsers);        
+}); 
+
+
 module.exports = {router, users};
