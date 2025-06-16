@@ -5,11 +5,13 @@ const router = express.Router();
 let users = [{ id:1, name:"Sara"} , {id: 2, name:"Prasad"}];
 let posts = [{ id: 1, title: "Peaceful winds", content: "First post"}];
 let comments = [{id:1, postId:1, text: "Wow!"}];
-
+router.get("/", (req, res) => {
+    res.render("index", {users})
+})
 router.get("/users",  (req, res) => res.json(users));
+
 router.post("/users",  (req, res) => {
-    
-    
+
     
     const { name } = req.body;    
     if (!name) {
@@ -37,7 +39,7 @@ router.patch("/users/:id", (req, res) => {
     res.json({messgae: "User updated" ,user});
 });
 router.delete("/users/:id", (req, res) => {
-    const userId = parseInt(req.params.id, 10);
+    const userId = req.params.id;
     const userIndex = users.findIndex(u => u.id === userId);
     
     if (userIndex === -1) {

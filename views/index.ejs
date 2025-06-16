@@ -11,42 +11,27 @@
 
 <body>
     <h1>Welcome</h1>
-    <ul>
-        <% users.forEach(user=> { %>
-            <li>
-                <%= user.name %>
-            </li>
-            <% }); %>
-    </ul>
+    
+    
     <form id="myForm" method="POST" action="/users">
         <input type="text" name="name" placeholder="Enter user name" required />
         <button type="submit">Create the User</button>
     </form>
+    <ul>
+        <% users.forEach(user=> { %>
+            <li>
+                <%= user.name %>
+                <form action="/users/<%= user.id %>" method="POST">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit" onclick="return confirm('Are you sure want to delete this user?')" >
+                        X
+                    </button>
+                </form>
+            </li>
+            <% }); %>
+    </ul>
 
-    <script>
-        document.getElementById('myForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            console.log(event.target.value)
-            const form = event.target;
-            const formData = new FormData(form);
-            console.log(formData)
-            fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body:JSON.stringify({name: formData.get('name')}),
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Form submitted successfully!');
-                    } else {
-                        console.error('Form submission failed:', response.status);
-                    }
-                })
-        });
-
-    </script>
+   
 </body>
 
 </html>
