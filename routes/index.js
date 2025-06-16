@@ -9,7 +9,7 @@ let comments = [{id:1, postId:1, text: "Wow!"}];
 router.get("/users",  (req, res) => res.json(users));
 router.post("/users",  (req, res) => {
     
-    // const payload = JSON.parse(req.body);
+    
     
     const { name } = req.body;    
     if (!name) {
