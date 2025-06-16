@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="public/styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
 </head>
 
@@ -21,16 +21,27 @@
         <% users.forEach(user=> { %>
             <li>
                 <%= user.name %>
-                <form action="/users/<%= user.id %>" method="POST">
-                    <input type="hidden" name="_method" value="DELETE"/>
+                <form id="edit-user-<%= user.id %>" action="/users/<%= user.id %>?_method=PUT" method="POST" style="display: none;">
+                    <input type="text" name="name" value="<%= user.name  %>" />
+                    <button type="submit">
+                        update
+                    </button>
+                </form>
+                <button type="button" onclick="toggleEditForm('<%= user.id %>')">Edit</button>
+                <form action="/users/<%= user.id %>?_method=DELETE" method="POST" style="display: inline;">
                     <button type="submit" onclick="return confirm('Are you sure want to delete this user?')" >
-                        X
+                        Delete
                     </button>
                 </form>
             </li>
             <% }); %>
     </ul>
-
+<script>
+    function toggleEditForm(userId) {
+        const editForm = document.querySelector(`#edit-user-${userId}`).closest("form");
+        editForm.style.display= editForm.style.display === 'none' ? "inline" : "none";
+    }
+</script>
    
 </body>
 

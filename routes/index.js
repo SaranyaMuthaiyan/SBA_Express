@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-let users = [{ id:1, name:"Sara"} , {id: 2, name:"Prasad"}];
+let users = [];
 let posts = [{ id: 1, title: "Peaceful winds", content: "First post"}];
 let comments = [{id:1, postId:1, text: "Wow!"}];
 router.get("/", (req, res) => {
@@ -20,12 +20,11 @@ router.post("/users",  (req, res) => {
     
     const newUser = { id: users.length + 1, name };
     users.push(newUser);
-    res.status(201).json(newUser);
+    res.redirect("/")
 });
-router.patch("/users/:id", (req, res) => {
-    const userId = parseInt(req.params.id, 10);
-    console.log(userId);
-    const user = users.find(u => u.id === userId);
+router.put("/users/:id", (req, res) => {
+    const userId = req.params.id
+    const user = users.find(u => u.id == userId);
     
     if (!user) {
         return res.status(404).json({ error: "User not found" });
@@ -36,18 +35,18 @@ router.patch("/users/:id", (req, res) => {
         user.name = req.body.name;
     }
     
-    res.json({messgae: "User updated" ,user});
+    res.redirect("/")
 });
 router.delete("/users/:id", (req, res) => {
     const userId = req.params.id;
-    const userIndex = users.findIndex(u => u.id === userId);
+    const userIndex = users.findIndex(u => u.id == userId);
     
     if (userIndex === -1) {
         return res.status(404).json({ error: "User not found" });
     }
     
     users.splice(userIndex, 1);
-    res.json({ message: "User deleted" });
+    res.redirect("/")
 });
 
 router.get("/posts", (req, res) => res.json(posts));
